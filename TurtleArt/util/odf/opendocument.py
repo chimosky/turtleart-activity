@@ -365,7 +365,8 @@ class OpenDocument:
     def addObject(self, document, objectname=None):
         """
         Adds an object (subdocument). The object must be an OpenDocument class
-        The return value will be the folder in the zipfile the object is stored in
+        The return value will be the folder in the zipfile the object is stored
+        in
         """
         self.childobjects.append(document)
         if objectname is None:
