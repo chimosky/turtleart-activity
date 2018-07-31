@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # Copyright (C) 2008 Eben Eliason
 # Copyright (C) 2013 Jorge Alberto Gómez López
@@ -22,7 +22,6 @@ import xml.dom.minidom
 import getopt
 import re
 import os
-import string
 
 HELP = '''\nUsage: sugar-iconify.py [options] input.svg\n
 Options:\n
@@ -111,7 +110,7 @@ class SugarIconify():
             elif o == '-p':
                 self.set_pattern(a)
             elif o in ['-h', '--help']:
-                usage()
+                self.usage()
                 sys.exit(2)
             elif o == '-m':
                 self.set_multiple(True)
@@ -326,9 +325,12 @@ Should be (55px, 55px)' % (self.w, self.h)
 
             '''if self.entities_passed < 2:
                 if self.confirm_guess:
-                    response = raw_input('\nAre these self.entities correct? [y/n] ')
+                    response = raw_input(
+                        '\nAre these self.entities correct? [y/n] ')
                     if response.lower() != 'y':
-                        print 'Please run this script again, passing the proper colors with the -s and -f flags.'
+                        print 'Please run this script again,
+                            passing the proper colors with the\
+                             -s and -f flags.'
                         sys.exit(1)'''
 
         # Define the HTML for preview output

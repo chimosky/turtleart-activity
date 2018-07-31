@@ -1,0 +1,11 @@
+[flake8]
+
+# E402 module level import not at top of file
+# gi.require_version() is required before later imports
+# E741 ambiguous variable name 'l'
+# F841 local variable 'output' is assigned to but never used
+# F401 'TurtleArt.tatype.*' imported but unused
+# F601 dictionary key ((<pyflakes.checker.VariableKey object at 0x7f8119c389d0>, u'case-sensitive'), None) repeated with different values
+# F811 redefinition of unused 'activity' from line 43
+
+ignore = E402, E741, F405, F403, F841, F401, F601, F811

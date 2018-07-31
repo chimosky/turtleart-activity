@@ -13,7 +13,7 @@
 #
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 # Contributor(s):
 #
@@ -52,8 +52,10 @@ def cnv_boolean(attribute, arg, element):
 
 
 def cnv_color(attribute, arg, element):
-    """ A RGB color in conformance with §5.9.11 of [XSL], that is a RGB color in notation “#rrggbb”, where
-        rr, gg and bb are 8-bit hexadecimal digits.
+    """
+    A RGB color in conformance with §5.9.11 of [XSL],
+    that is a RGB color in notation “#rrggbb”, where
+    rr, gg and bb are 8-bit hexadecimal digits.
     """
     return str(arg)
 
@@ -74,15 +76,17 @@ def cnv_data_source_has_labels(attribute, arg, element):
 
 
 def cnv_date(attribute, arg, element):
-    """ A dateOrDateTime value is either an [xmlschema-2] date value or an [xmlschema-2] dateTime
-        value.
+    """
+    A dateOrDateTime value is either an [xmlschema-2] date value
+    or an [xmlschema-2] dateTime value.
     """
     return str(arg)
 
 
 def cnv_dateTime(attribute, arg, element):
-    """ A dateOrDateTime value is either an [xmlschema-2] date value or an [xmlschema-2] dateTime
-        value.
+    """
+    A dateOrDateTime value is either an [xmlschema-2] date value
+    or an [xmlschema-2] dateTime value.
     """
     return str(arg)
 
@@ -120,17 +124,18 @@ def __save_prefix(attribute, arg, element):
         return unicode(arg)
     namespace = element.get_knownns(prefix)
     if namespace is None:
-        #raise ValueError, "'%s' is an unknown prefix" % str(prefix)
         return unicode(arg)
     p = element.get_nsprefix(namespace)
     return unicode(arg)
 
 
 def cnv_formula(attribute, arg, element):
-    """ A string containing a formula. Formulas do not have a predefined syntax, but the string should
-        begin with a namespace prefix, followed by a “:” (COLON, U+003A) separator, followed by the text
-        of the formula. The namespace bound to the prefix determines the syntax and semantics of the
-        formula.
+    """
+    A string containing a formula. Formulas do not have a predefined syntax,
+    but the string should begin with a namespace prefix, followed by a “:”
+    (COLON, U+003A) separator, followed by the text of the formula.
+    The namespace bound to the prefix determines the syntax and semantics of
+    the formula.
     """
     return __save_prefix(attribute, arg, element)
 
@@ -159,8 +164,9 @@ pattern_length = re.compile(
 
 
 def cnv_length(attribute, arg, element):
-    """ A (positive or negative) physical length, consisting of magnitude and unit, in conformance with the
-        Units of Measure defined in §5.9.13 of [XSL].
+    """
+    A (positive or negative) physical length, consisting of magnitude and unit,
+    in conformance with the Units of Measure defined in §5.9.13 of [XSL].
     """
     global pattern_length
     if not pattern_length.match(arg):
@@ -261,7 +267,6 @@ def cnv_percent(attribute, arg, element):
 
 # Real one doesn't allow floating point values
 pattern_points = re.compile(r'-?[0-9]+,-?[0-9]+([ ]+-?[0-9]+,-?[0-9]+)*')
-#pattern_points = re.compile(r'-?[0-9.]+,-?[0-9.]+([ ]+-?[0-9.]+,-?[0-9.]+)*')
 
 
 def cnv_points(attribute, arg, element):
@@ -269,7 +274,8 @@ def cnv_points(attribute, arg, element):
     if type(arg) in types.StringTypes:
         if not pattern_points.match(arg):
             raise ValueError(
-                "x,y are separated by a comma and the points are separated by white spaces")
+                "x,y are separated by a comma and the points are separated\
+                by white spaces")
         return arg
     else:
         try:
@@ -334,7 +340,7 @@ attrconverters = {
     ((ANIMNS, u'name'), None): cnv_string,
     ((ANIMNS, u'sub-item'), None): cnv_string,
     ((ANIMNS, u'value'), None): cnv_string,
-    #	((DBNS,u'type'), None): cnv_namespacedToken,
+    #    ((DBNS,u'type'), None): cnv_namespacedToken,
     ((CHARTNS, u'attached-axis'), None): cnv_string,
     ((CHARTNS, u'class'), (CHARTNS, u'grid')): cnv_major_minor,
     ((CHARTNS, u'class'), None): cnv_namespacedToken,
@@ -556,8 +562,6 @@ attrconverters = {
     ((DRAWNS, u'handle-range-y-maximum'), None): cnv_string,
     ((DRAWNS, u'handle-range-y-minimum'), None): cnv_string,
     ((DRAWNS, u'handle-switched'), None): cnv_boolean,
-    #	((DRAWNS,u'id'), None): cnv_ID,
-    #	((DRAWNS,u'id'), None): cnv_nonNegativeInteger,   # ?? line 6581 in RNG
     ((DRAWNS, u'id'), None): cnv_string,
     ((DRAWNS, u'image-opacity'), None): cnv_string,
     ((DRAWNS, u'kind'), None): cnv_string,
@@ -580,7 +584,6 @@ attrconverters = {
     ((DRAWNS, u'mirror-vertical'), None): cnv_boolean,
     ((DRAWNS, u'modifiers'), None): cnv_string,
     ((DRAWNS, u'name'), None): cnv_NCName,
-    #	((DRAWNS,u'name'), None): cnv_string,
     ((DRAWNS, u'nav-order'), None): cnv_IDREF,
     ((DRAWNS, u'nohref'), None): cnv_string,
     ((DRAWNS, u'notify-on-update-of-ranges'), None): cnv_string,
@@ -717,10 +720,7 @@ attrconverters = {
     ((FORMNS, u'convert-empty-to-null'), None): cnv_boolean,
     ((FORMNS, u'current-selected'), None): cnv_boolean,
     ((FORMNS, u'current-state'), None): cnv_string,
-    #	((FORMNS,u'current-value'), None): cnv_date,
-    #	((FORMNS,u'current-value'), None): cnv_double,
     ((FORMNS, u'current-value'), None): cnv_string,
-    #	((FORMNS,u'current-value'), None): cnv_time,
     ((FORMNS, u'data-field'), None): cnv_string,
     ((FORMNS, u'datasource'), None): cnv_string,
     ((FORMNS, u'default-button'), None): cnv_boolean,
@@ -745,15 +745,9 @@ attrconverters = {
     ((FORMNS, u'list-source-type'), None): cnv_string,
     ((FORMNS, u'master-fields'), None): cnv_string,
     ((FORMNS, u'max-length'), None): cnv_nonNegativeInteger,
-    #	((FORMNS,u'max-value'), None): cnv_date,
-    #	((FORMNS,u'max-value'), None): cnv_double,
     ((FORMNS, u'max-value'), None): cnv_string,
-    #	((FORMNS,u'max-value'), None): cnv_time,
     ((FORMNS, u'method'), None): cnv_string,
-    #	((FORMNS,u'min-value'), None): cnv_date,
-    #	((FORMNS,u'min-value'), None): cnv_double,
     ((FORMNS, u'min-value'), None): cnv_string,
-    #	((FORMNS,u'min-value'), None): cnv_time,
     ((FORMNS, u'multi-line'), None): cnv_boolean,
     ((FORMNS, u'multiple'), None): cnv_boolean,
     ((FORMNS, u'name'), None): cnv_string,
@@ -775,10 +769,7 @@ attrconverters = {
     ((FORMNS, u'title'), None): cnv_string,
     ((FORMNS, u'toggle'), None): cnv_boolean,
     ((FORMNS, u'validation'), None): cnv_boolean,
-    #	((FORMNS,u'value'), None): cnv_date,
-    #	((FORMNS,u'value'), None): cnv_double,
     ((FORMNS, u'value'), None): cnv_string,
-    #	((FORMNS,u'value'), None): cnv_time,
     ((FORMNS, u'visual-effect'), None): cnv_string,
     ((FORMNS, u'xforms-list-source'), None): cnv_string,
     ((FORMNS, u'xforms-submission'), None): cnv_string,
@@ -800,7 +791,8 @@ attrconverters = {
     ((METANS, u'frame-count'), None): cnv_nonNegativeInteger,
     ((METANS, u'image-count'), None): cnv_nonNegativeInteger,
     ((METANS, u'name'), None): cnv_string,
-    ((METANS, u'non-whitespace-character-count'), None): cnv_nonNegativeInteger,
+    ((METANS, u'non-whitespace-character-count'),
+     None): cnv_nonNegativeInteger,
     ((METANS, u'object-count'), None): cnv_nonNegativeInteger,
     ((METANS, u'ole-object-count'), None): cnv_nonNegativeInteger,
     ((METANS, u'page-count'), None): cnv_nonNegativeInteger,
@@ -885,7 +877,8 @@ attrconverters = {
     ((PRESENTATIONNS, u'pause'), None): cnv_duration,
     ((PRESENTATIONNS, u'placeholder'), None): cnv_boolean,
     ((PRESENTATIONNS, u'play-full'), None): cnv_boolean,
-    ((PRESENTATIONNS, u'presentation-page-layout-name'), None): cnv_StyleNameRef,
+    ((PRESENTATIONNS, u'presentation-page-layout-name'),
+     None): cnv_StyleNameRef,
     ((PRESENTATIONNS, u'preset-class'), None): cnv_string,
     ((PRESENTATIONNS, u'preset-id'), None): cnv_string,
     ((PRESENTATIONNS, u'preset-sub-type'), None): cnv_string,
@@ -1067,7 +1060,7 @@ attrconverters = {
     ((STYLENS, u'print-page-order'), None): cnv_string,
     ((STYLENS, u'protect'), (STYLENS, u'section-properties')): cnv_boolean,
     ((STYLENS, u'protect'), (STYLENS, u'graphic-properties')): cnv_string,
-    #	((STYLENS,u'protect'), None): cnv_boolean,
+    #    ((STYLENS,u'protect'), None): cnv_boolean,
     ((STYLENS, u'punctuation-wrap'), None): cnv_string,
     ((STYLENS, u'register-true'), None): cnv_boolean,
     ((STYLENS, u'register-truth-ref-style-name'), None): cnv_string,
@@ -1326,7 +1319,8 @@ attrconverters = {
     ((TABLENS, u'rejecting-change-id'), None): cnv_string,
     ((TABLENS, u'row'), None): cnv_integer,
     ((TABLENS, u'scenario-ranges'), None): cnv_string,
-    ((TABLENS, u'search-criteria-must-apply-to-whole-cell'), None): cnv_boolean,
+    ((TABLENS, u'search-criteria-must-apply-to-whole-cell'),
+     None): cnv_boolean,
     ((TABLENS, u'selected-page'), None): cnv_string,
     ((TABLENS, u'show-details'), None): cnv_boolean,
     ((TABLENS, u'show-empty'), None): cnv_boolean,
@@ -1417,7 +1411,7 @@ attrconverters = {
     ((TEXTNS, u'database-name'), None): cnv_string,
     ((TEXTNS, u'date-adjust'), None): cnv_duration,
     ((TEXTNS, u'date-value'), None): cnv_date,
-    #	((TEXTNS,u'date-value'), None): cnv_dateTime,
+    #    ((TEXTNS,u'date-value'), None): cnv_dateTime,
     ((TEXTNS, u'default-style-name'), None): cnv_StyleNameRef,
     ((TEXTNS, u'description'), None): cnv_string,
     ((TEXTNS, u'display'), None): cnv_string,
@@ -1436,7 +1430,7 @@ attrconverters = {
     ((TEXTNS, u'global'), None): cnv_boolean,
     ((TEXTNS, u'howpublished'), None): cnv_string,
     ((TEXTNS, u'id'), None): cnv_ID,
-    #	((TEXTNS,u'id'), None): cnv_string,
+    #    ((TEXTNS,u'id'), None): cnv_string,
     ((TEXTNS, u'identifier'), None): cnv_string,
     ((TEXTNS, u'ignore-case'), None): cnv_boolean,
     ((TEXTNS, u'increment'), None): cnv_nonNegativeInteger,

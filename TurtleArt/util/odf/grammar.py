@@ -13,7 +13,7 @@
 #
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 # Contributor(s):
 #
@@ -64,24 +64,24 @@ allowed_children = {
     (DCNS, u'title'): (
     ),
     # Completes Dublin Core start
-    #	(DCNS,'contributor') : (
-    #	),
-    #	(DCNS,'coverage') : (
-    #	),
-    #	(DCNS,'format') : (
-    #	),
-    #	(DCNS,'identifier') : (
-    #	),
-    #	(DCNS,'publisher') : (
-    #	),
-    #	(DCNS,'relation') : (
-    #	),
-    #	(DCNS,'rights') : (
-    #	),
-    #	(DCNS,'source') : (
-    #	),
-    #	(DCNS,'type') : (
-    #	),
+    #   (DCNS,'contributor') : (
+    #   ),
+    #   (DCNS,'coverage') : (
+    #   ),
+    #   (DCNS,'format') : (
+    #   ),
+    #   (DCNS,'identifier') : (
+    #   ),
+    #   (DCNS,'publisher') : (
+    #   ),
+    #   (DCNS,'relation') : (
+    #   ),
+    #   (DCNS,'rights') : (
+    #   ),
+    #   (DCNS,'source') : (
+    #   ),
+    #   (DCNS,'type') : (
+    #   ),
     # Completes Dublin Core end
     (MATHNS, u'math'): None,
 
@@ -981,15 +981,15 @@ allowed_children = {
         (DCNS, u'subject'),
         (DCNS, u'title'),
         # Completes Dublin Core start
-        #		(DCNS,'contributor'),
-        #		(DCNS,'coverage'),
-        #		(DCNS,'format'),
-        #		(DCNS,'identifier'),
-        #		(DCNS,'publisher'),
-        #		(DCNS,'relation'),
-        #		(DCNS,'rights'),
-        #		(DCNS,'source'),
-        #		(DCNS,'type'),
+        #               (DCNS,'contributor'),
+        #               (DCNS,'coverage'),
+        #               (DCNS,'format'),
+        #               (DCNS,'identifier'),
+        #               (DCNS,'publisher'),
+        #               (DCNS,'relation'),
+        #               (DCNS,'rights'),
+        #               (DCNS,'source'),
+        #               (DCNS,'type'),
         # Completes Dublin Core end
         (METANS, u'auto-reload'),
         (METANS, u'creation-date'),
@@ -3245,15 +3245,15 @@ allows_text = (
     (DCNS, u'subject'),
     (DCNS, u'title'),
     # Completes Dublin Core start
-    #	(DCNS,'contributor'),
-    #	(DCNS,'coverage'),
-    #	(DCNS,'format'),
-    #	(DCNS,'identifier'),
-    #	(DCNS,'publisher'),
-    #	(DCNS,'relation'),
-    #	(DCNS,'rights'),
-    #	(DCNS,'source'),
-    #	(DCNS,'type'),
+    #   (DCNS,'contributor'),
+    #   (DCNS,'coverage'),
+    #   (DCNS,'format'),
+    #   (DCNS,'identifier'),
+    #   (DCNS,'publisher'),
+    #   (DCNS,'relation'),
+    #   (DCNS,'rights'),
+    #   (DCNS,'source'),
+    #   (DCNS,'type'),
     # Completes Dublin Core end
     (FORMNS, u'item'),
     (FORMNS, u'option'),
@@ -4239,24 +4239,24 @@ allowed_attributes = {
     (DCNS, u'title'): (
     ),
     # Completes Dublin Core start
-    #	(DCNS,'contributor') : (
-    #	),
-    #	(DCNS,'coverage') : (
-    #	),
-    #	(DCNS,'format') : (
-    #	),
-    #	(DCNS,'identifier') : (
-    #	),
-    #	(DCNS,'publisher') : (
-    #	),
-    #	(DCNS,'relation') : (
-    #	),
-    #	(DCNS,'rights') : (
-    #	),
-    #	(DCNS,'source') : (
-    #	),
-    #	(DCNS,'type') : (
-    #	),
+    #   (DCNS,'contributor') : (
+    #   ),
+    #   (DCNS,'coverage') : (
+    #   ),
+    #   (DCNS,'format') : (
+    #   ),
+    #   (DCNS,'identifier') : (
+    #   ),
+    #   (DCNS,'publisher') : (
+    #   ),
+    #   (DCNS,'relation') : (
+    #   ),
+    #   (DCNS,'rights') : (
+    #   ),
+    #   (DCNS,'source') : (
+    #   ),
+    #   (DCNS,'type') : (
+    #   ),
     # Completes Dublin Core end
     (MATHNS, u'math'): None,
     (XFORMSNS, u'model'): None,

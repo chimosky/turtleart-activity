@@ -14,7 +14,7 @@
 #
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 # Contributor(s):
 #
@@ -89,15 +89,18 @@ def _nsassign(namespace):
 
 
 class IllegalChild(Exception):
-    """ Complains if you add an element to a parent where it is not allowed """
+    """Complains if you add an element to a parent where it is not allowed"""
 
 
 class IllegalText(Exception):
-    """ Complains if you add text or cdata to an element where it is not allowed """
+    """
+    Complains if you add text or cdata to an element where it is not
+    allowed
+    """
 
 
 class Node(xml.dom.Node):
-    """ super class for more specific nodes """
+    """super class for more specific nodes"""
     parentNode = None
     nextSibling = None
     previousSibling = None
@@ -123,8 +126,10 @@ class Node(xml.dom.Node):
             return self.childNodes[-1]
 
     def insertBefore(self, newChild, refChild):
-        """ Inserts the node newChild before the existing child node refChild.
-            If refChild is null, insert newChild at the end of the list of children.
+        """
+        Inserts the node newChild before the existing child node refChild.
+        If refChild is null, insert newChild at the end of the list of
+        children.
         """
         if newChild.nodeType not in self._child_node_types:
             raise IllegalChild("%s cannot be child of %s" % (
@@ -169,7 +174,9 @@ class Node(xml.dom.Node):
         return newChild
 
     def removeChild(self, oldChild):
-        """ Removes the child node indicated by oldChild from the list of children, and returns it.
+        """
+        Removes the child node indicated by oldChild from the list of children,
+        and returns it.
         """
         # FIXME: update ownerDocument.element_dict or find other solution
         try:
@@ -287,11 +294,13 @@ class CDATASection(Childless, Text):
 
 
 class Element(Node):
-    """ Creates a arbitrary element and is intended to be subclassed not used on its own.
-        This element is the base of every element it defines a class which resembles
-        a xml-element. The main advantage of this kind of implementation is that you don't
-        have to create a toXML method for every different object. Every element
-        consists of an attribute, optional subelements, optional text and optional cdata.
+    """
+    Creates a arbitrary element and is intended to be subclassed not used on
+    its own. This element is the base of every element it defines a class which
+    resembles a xml-element. The main advantage of this kind of implementation
+    is that you don't have to create a toXML method for every different object.
+    Every element consists of an attribute, optional subelements, optional text
+    and optional cdata.
     """
 
     nodeType = Node.ELEMENT_NODE
@@ -352,8 +361,10 @@ class Element(Node):
                             '-', ''), self.tagName))
 
     def get_knownns(self, prefix):
-        """ Odfpy maintains a list of known namespaces. In some cases a prefix is used, and
-            we need to know which namespace it resolves to.
+        """
+        Odfpy maintains a list of known namespaces.
+        In some cases a prefix is used, and
+        we need to know which namespace it resolves to.
         """
         global nsdict
         for ns, p in nsdict.items():
@@ -362,8 +373,10 @@ class Element(Node):
         return None
 
     def get_nsprefix(self, namespace):
-        """ Odfpy maintains a list of known namespaces. In some cases we have a namespace URL,
-            and needs to look up or assign the prefix for it.
+        """
+        Odfpy maintains a list of known namespaces.
+        In some cases we have a namespace URL,
+        and needs to look up or assign the prefix for it.
         """
         if namespace is None:
             namespace = ""
@@ -426,7 +439,8 @@ class Element(Node):
                 self.removeAttrNS(prefix, localname)
             else:
                 raise AttributeError(
-                    "Unable to add simple attribute - use (namespace, localpart)")
+                    "Unable to add simple attribute -\
+                    use (namespace, localpart)")
         else:
             # Construct a list of allowed arguments
             allowed_args = [a[1].lower().replace('-', '')
@@ -438,12 +452,13 @@ class Element(Node):
             self.removeAttrNS(allowed_attrs[i][0], allowed_attrs[i][1])
 
     def setAttribute(self, attr, value, check_grammar=True):
-        """ Add an attribute to the element
-            This is sort of a convenience method. All attributes in ODF have
-            namespaces. The library knows what attributes are legal and then allows
-            the user to provide the attribute as a keyword argument and the
-            library will add the correct namespace.
-            Must overwrite, If attribute already exists.
+        """
+        Add an attribute to the element
+        This is sort of a convenience method. All attributes in ODF have
+        namespaces. The library knows what attributes are legal and then
+        allows the user to provide the attribute as a keyword argument and
+        the library will add the correct namespace.
+        Must overwrite, If attribute already exists.
         """
         allowed_attrs = self.allowed_attributes()
         if allowed_attrs is None:
@@ -452,7 +467,8 @@ class Element(Node):
                 self.setAttrNS(prefix, localname, value)
             else:
                 raise AttributeError(
-                    "Unable to add simple attribute - use (namespace, localpart)")
+                    "Unable to add simple attribute -\
+                    use (namespace, localpart)")
         else:
             # Construct a list of allowed arguments
             allowed_args = [a[1].lower().replace('-', '')
@@ -464,16 +480,15 @@ class Element(Node):
             self.setAttrNS(allowed_attrs[i][0], allowed_attrs[i][1], value)
 
     def setAttrNS(self, namespace, localpart, value):
-        """ Add an attribute to the element
-            In case you need to add an attribute the library doesn't know about
-            then you must provide the full qualified name
-            It will not check that the attribute is legal according to the schema.
-            Must overwrite, If attribute already exists.
+        """
+        Add an attribute to the element
+        In case you need to add an attribute the library doesn't know about
+        then you must provide the full qualified name
+        It will not check that the attribute is legal according to the schema.
+        Must overwrite, If attribute already exists.
         """
         allowed_attrs = self.allowed_attributes()
         prefix = self.get_nsprefix(namespace)
-#       if allowed_attrs and (namespace, localpart) not in allowed_attrs:
-#           raise AttributeError, "Attribute %s:%s is not allowed in element <%s>" % ( prefix, localpart, self.tagName)
         c = AttrConverters()
         self.attributes[(namespace, localpart)] = c.convert(
             (namespace, localpart), value, self)
@@ -486,7 +501,9 @@ class Element(Node):
         del self.attributes[(namespace, localpart)]
 
     def getAttribute(self, attr):
-        """ Get an attribute value. The method knows which namespace the attribute is in
+        """
+        Get an attribute value.
+        The method knows which namespace the attribute is in.
         """
         allowed_attrs = self.allowed_attributes()
         if allowed_attrs is None:
@@ -495,7 +512,8 @@ class Element(Node):
                 return self.getAttrNS(prefix, localname)
             else:
                 raise AttributeError(
-                    "Unable to get simple attribute - use (namespace, localpart)")
+                    "Unable to get simple attribute -\
+                    use (namespace, localpart)")
         else:
             # Construct a list of allowed arguments
             allowed_args = [a[1].lower().replace('-', '')
@@ -516,7 +534,8 @@ class Element(Node):
                                 ':' +
                                 qname[1])) +
                     '=' +
-                    _quoteattr(unicode(self.attributes[qname]).encode('utf-8')))
+                    _quoteattr(
+                        unicode(self.attributes[qname]).encode('utf-8')))
         f.write('>')
 
     def write_close_tag(self, level, f):
@@ -536,7 +555,8 @@ class Element(Node):
                                 ':' +
                                 qname[1])) +
                     '=' +
-                    _quoteattr(unicode(self.attributes[qname]).encode('utf-8')))
+                    _quoteattr(
+                        unicode(self.attributes[qname]).encode('utf-8')))
         if self.childNodes:
             f.write('>')
             for element in self.childNodes:
@@ -554,7 +574,10 @@ class Element(Node):
         return accumulator
 
     def getElementsByType(self, element):
-        """ Gets elements based on the type, which is function from text.py, draw.py etc. """
+        """
+        Gets elements based on the type, which is function from text.py,
+        draw.py etc.
+        """
         obj = element(check_grammar=False)
         return self._getElementsByObj(obj, [])
 
